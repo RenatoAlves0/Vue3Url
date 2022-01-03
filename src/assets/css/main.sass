@@ -9,6 +9,13 @@ $gray-clear: #eaeaea
 $font-color-clear: white
 $red: #e00000
 
+// Geral
+
+.mt20
+    margin-top: 20px !important
+
+// Topbar + Corpo do App
+
 .my-topbar
     border-radius: 10px
     margin-top: 10px
@@ -17,8 +24,16 @@ $red: #e00000
         padding: 5px
         color: $font-color-clear
 
-.card
-    border-radius: 10px
+.topbar-right
+    justify-content: right
+
+.app-center
+    display: flex
+    justify-content: center
+    padding-top: 20px
+    padding-bottom: 20px
+
+// Lista URL
 
 .list-group-item
     border-radius: 10px !important
@@ -26,26 +41,15 @@ $red: #e00000
 .btn-list
     margin-top: 10px
 
-.topbar-right
-    justify-content: right
-
-.form-center
-    display: flex
-    justify-content: center
-    padding-top: 20px
-    padding-bottom: 20px
+// Formulários
 
 .form-body
-    padding: 20px
-    padding-top: 0px
     border-radius: 10px
     background-color: $gray-clear
-
-.form-group
-    margin-bottom: 20px
-
-.erro
-    color: $red
+    padding: 20px
 
 .form-control
     margin-top: 20px
+
+.erro
+    color: $red

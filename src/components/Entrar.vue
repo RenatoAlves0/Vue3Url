@@ -1,37 +1,34 @@
 <template>
-  <div class="form-center">
-    <form class="form-body col-sm-6">
-      <Form @submit="entrar" class="form-group">
-        <Field
-          class="form-control"
-          name="email"
-          type="email"
-          placeholder="Email"
-          :rules="validarEmail"
-          v-model="x.email"
-        />
-        <ErrorMessage class="erro" name="email" />
+  <Form @submit="entrar" class="form-group">
+    <h5>Entre no App</h5>
+    <Field
+      class="form-control"
+      name="email"
+      type="email"
+      placeholder="Email"
+      :rules="validarEmail"
+      v-model="x.email"
+    />
+    <ErrorMessage class="erro" name="email" />
 
-        <Field
-          class="form-control"
-          name="senha"
-          type="password"
-          placeholder="Senha"
-          :rules="validarSenha"
-          v-model="x.senha"
-        />
-        <ErrorMessage class="erro" name="senha" />
-      </Form>
+    <Field
+      class="form-control"
+      name="senha"
+      type="password"
+      placeholder="Senha"
+      :rules="validarSenha"
+      v-model="x.senha"
+    />
+    <ErrorMessage class="erro" name="senha" />
 
-      <button
-        type="submit"
-        :class="validar() ? '' : 'disabled'"
-        class="btn btn-primary"
-      >
-        Entrar
-      </button>
-    </form>
-  </div>
+    <button
+      type="submit"
+      :class="validar() ? '' : 'disabled'"
+      class="btn btn-primary form-control"
+    >
+      Entrar
+    </button>
+  </Form>
 </template>
 
 <script>

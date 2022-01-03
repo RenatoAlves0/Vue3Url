@@ -1,5 +1,4 @@
 <script setup>
-import Home from "./components/Home.vue";
 import Topbar from "./components/Topbar.vue";
 </script>
 
@@ -7,7 +6,13 @@ import Topbar from "./components/Topbar.vue";
   <div id="app">
     <Topbar />
     <div class="container">
-      <router-view></router-view>
+      <div class="app-center">
+        <div class="col-sm-6">
+          <form class="form-body">
+            <router-view></router-view>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </template>

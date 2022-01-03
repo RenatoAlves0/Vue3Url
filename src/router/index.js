@@ -15,6 +15,11 @@ const routes = [
         path: '/registrar',
         name: 'registrar',
         component: () => import('../components/Registrar.vue')
+    },
+    {
+        path: '/nova_url',
+        name: 'nova_url',
+        component: () => import('../components/url/Cadastro.vue')
     }
 ]
 

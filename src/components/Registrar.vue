@@ -1,64 +1,61 @@
 <template>
-  <div class="form-center">
-    <form class="form-body col-sm-6">
-      <Form @submit="registrar" class="form-group">
-        <Field
-          class="form-control"
-          name="nome"
-          type="text"
-          placeholder="Nome"
-          :rules="validarNome"
-          v-model="x.nome"
-        />
-        <ErrorMessage class="erro" name="nome" />
+  <Form @submit="registrar" class="form-group">
+    <h5>Registre-se no App</h5>
+    <Field
+      class="form-control"
+      name="nome"
+      type="text"
+      placeholder="Nome"
+      :rules="validarNome"
+      v-model="x.nome"
+    />
+    <ErrorMessage class="erro" name="nome" />
 
-        <Field
-          class="form-control"
-          name="email"
-          type="email"
-          placeholder="Email"
-          :rules="validarEmail"
-          v-model="x.email"
-        />
-        <small class="form-text text-muted">
-          Nunca vamos compartilhar seu email, com ninguém.</small
-        >
-        <br />
-        <ErrorMessage class="erro" name="email" />
+    <Field
+      class="form-control"
+      name="email"
+      type="email"
+      placeholder="Email"
+      :rules="validarEmail"
+      v-model="x.email"
+    />
+    <small class="form-text text-muted">
+      Nunca vamos compartilhar seu email, com ninguém.</small
+    >
+    <br />
+    <ErrorMessage class="erro" name="email" />
 
-        <Field
-          class="form-control"
-          name="senha"
-          type="password"
-          placeholder="Senha"
-          :rules="validarSenha"
-          v-model="x.senha"
-        />
-        <small class="form-text text-muted">
-          Criptografamos sua senha, de ponta a ponta.</small
-        >
-        <br />
-        <ErrorMessage class="erro" name="senha" />
+    <Field
+      class="form-control"
+      name="senha"
+      type="password"
+      placeholder="Senha"
+      :rules="validarSenha"
+      v-model="x.senha"
+    />
+    <small class="form-text text-muted">
+      Criptografamos sua senha, de ponta a ponta.</small
+    >
+    <br />
+    <ErrorMessage class="erro" name="senha" />
 
-        <Field
-          class="form-control"
-          name="confirm-senha"
-          type="password"
-          placeholder="Confirmar Senha"
-          :rules="validarConfirmSenha"
-        />
-        <ErrorMessage class="erro" name="confirm-senha" />
-      </Form>
+    <Field
+      class="form-control"
+      name="confirm-senha"
+      type="password"
+      placeholder="Confirmar Senha"
+      :rules="validarConfirmSenha"
+    />
+    <ErrorMessage class="erro" name="confirm-senha" />
 
-      <button
-        type="submit"
-        :class="validar() ? '' : 'disabled'"
-        class="btn btn-primary"
-      >
-        Registrar
-      </button>
-    </form>
-  </div>
+    <button
+      type="submit"
+      :class="validar() ? '' : 'disabled'"
+      class="btn btn-primary form-control"
+    >
+      Registrar
+    </button>
+  </Form>
 </template>
 
 <script>

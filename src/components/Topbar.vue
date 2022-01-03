@@ -26,6 +26,11 @@
         <li class="nav-item active">
           <router-link class="nav-link" to="/">Home</router-link>
         </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/nova_url"
+            >Adicionar URL</router-link
+          >
+        </li>
       </ul>
       <ul class="navbar-nav mr-auto col-sm-6 topbar-right">
         <li class="nav-item">
