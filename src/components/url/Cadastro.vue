@@ -18,11 +18,14 @@
     >
       Salvar
     </button>
+
+    <h5>{{ usuario }}</h5>
   </Form>
 </template>
 
 <script>
 import { Field, Form, ErrorMessage } from "vee-validate";
+import UserService from "../../services/user";
 export default {
   name: "Entrar",
   components: {
@@ -32,11 +35,27 @@ export default {
   },
   data() {
     return {
+      usuario: "",
       vUrl: false,
       x: {
         url: "",
       },
     };
+  },
+  mounted() {
+    UserService.getUser().then(
+      (response) => {
+        this.usuario = response.data;
+      },
+      (error) => {
+        this.usuario =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+      }
+    );
   },
   methods: {
     entrar() {
