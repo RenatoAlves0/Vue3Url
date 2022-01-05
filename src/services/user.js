@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:3000/'
+const API_URL = 'http://localhost:3001/'
 
 class UserService {
     getUser() {
@@ -14,6 +14,5 @@ class UserService {
         return axios.get(API_URL + 'user/verificar_token', { headers: token })
     }
 }
-
 
 export default new UserService()

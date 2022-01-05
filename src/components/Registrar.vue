@@ -1,5 +1,5 @@
 <template>
-  <Form @submit="registrar" class="form-group">
+  <Form class="form-group">
     <h5>Registre-se no App</h5>
     <Field
       class="form-control"
@@ -48,27 +48,34 @@
     />
     <ErrorMessage class="erro" name="confirm-senha" />
 
-    <button
-      type="submit"
-      :class="validar() ? '' : 'disabled'"
-      class="btn btn-primary form-control"
-    >
-      Registrar
-    </button>
+    <Botao
+      nome="Registrar"
+      :loading="loading"
+      :funcao="registrar"
+      :validar="validar"
+    />
+    <Alerta :msg="msg" :ok="ok" />
   </Form>
 </template>
 
 <script>
+import Alerta from "./basics/Alerta.vue";
+import Botao from "./basics/Botao.vue";
 import { Field, Form, ErrorMessage } from "vee-validate";
 export default {
   name: "Registrar",
   components: {
+    Alerta,
+    Botao,
     Field,
     Form,
     ErrorMessage,
   },
   data() {
     return {
+      msg: "",
+      ok: false,
+      loading: false,
       vNome: false,
       vEmail: false,
       vSenha: false,
@@ -82,13 +89,32 @@ export default {
   },
   methods: {
     registrar() {
-      console.log({ ...this.x });
+      this.msg = "";
+      this.ok = false;
+      this.loading = true;
+      this.$store.dispatch("auth/register", this.x).then(
+        (data) => {
+          this.msg = data.message;
+          this.ok = true;
+          this.loading = false;
+        },
+        (error) => {
+          this.msg =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+          this.ok = false;
+          this.loading = false;
+        }
+      );
+      return false;
     },
     validar() {
       return this.vNome && this.vEmail && this.vSenha && this.vConfirmSenha;
     },
     validarNome(nome) {
-      this.registrar();
       this.vNome = false;
       if (!nome) return "Obrigatório!";
       if (String(nome).length < 2) return "Nome com pelo menos 2 caracteres!";

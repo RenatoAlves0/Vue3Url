@@ -40,7 +40,7 @@ export const auth = {
       )
     }
   },
-  
+
   mutations: {
     loginSuccess(state, user) {
       state.status.loggedIn = true
