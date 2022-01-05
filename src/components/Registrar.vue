@@ -97,6 +97,7 @@ export default {
           this.msg = data.message;
           this.ok = true;
           this.loading = false;
+          this.$router.push("/entrar");
         },
         (error) => {
           this.msg =

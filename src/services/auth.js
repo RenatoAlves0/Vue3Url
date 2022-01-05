@@ -11,16 +11,17 @@ class AuthService {
     })
   }
 
-  login(user) {
-    return axios
-      .post(API_URL + '/logar', {
-        nome: user.nome,
-        senha: user.senha
+  async login(user) {
+    const resp = await axios
+      .get(API_URL + '/logar', {
+        params: {
+          email: user.email,
+          senha: user.senha
+        }
       })
-      .then(resp => {
-        if (resp.data.accessToken) localStorage.setItem('user', JSON.stringify(resp.data))
-        return resp.data
-      })
+    if (resp.data.accessToken)
+      localStorage.setItem('user', JSON.stringify(resp.data))
+    return resp.data
   }
 
   logout() {
