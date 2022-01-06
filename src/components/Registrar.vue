@@ -34,7 +34,6 @@
       :modelo="x.confirmSenha"
       @changeModelo="x.confirmSenha = $event"
     />
-
     <Botao
       nome="Registrar"
       :loading="loading"
@@ -75,7 +74,10 @@ export default {
         (data) => {
           this.loading = false;
           this.alerta(data.message, true);
-          this.$router.push("/entrar");
+          this.$router.push({
+            name: "entrar",
+            params: { email: this.x.email, senha: this.x.senha },
+          });
         },
         (error) => {
           this.loading = false;

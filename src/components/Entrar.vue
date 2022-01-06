@@ -41,8 +41,8 @@ export default {
       vEmail: false,
       vSenha: false,
       x: {
-        email: "",
-        senha: "",
+        email: this.$route.params.email || "",
+        senha: this.$route.params.senha || "",
       },
     };
   },

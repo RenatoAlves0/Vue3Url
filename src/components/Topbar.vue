@@ -12,7 +12,7 @@
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
       aria-label="Alterna navegação"
-      v-on:click="toggleNavbar"
+      @click="toggleNavbar"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,7 +23,7 @@
       v-bind:class="{ in: show }"
     >
       <ul class="navbar-nav mr-auto col-sm-6">
-        <li class="nav-item active">
+        <li class="nav-item">
           <router-link class="nav-link" to="/">Home</router-link>
         </li>
         <li class="nav-item">
@@ -33,17 +33,17 @@
         </li>
       </ul>
       <ul class="navbar-nav mr-auto col-sm-6 topbar-right">
-        <li class="nav-item">
-          <a class="nav-link disabled">Olá Renato :-)</a>
+        <li v-if="usuario" class="nav-item">
+          <a class="nav-link disabled">Olá {{ usuario.nome }} :-)</a>
         </li>
-        <li class="nav-item">
+        <li v-if="!usuario" class="nav-item">
           <router-link class="nav-link" to="/registrar">Registrar</router-link>
         </li>
-        <li class="nav-item">
+        <li v-if="!usuario" class="nav-item">
           <router-link class="nav-link" to="/entrar">Entrar</router-link>
         </li>
-        <li class="nav-item">
-          <router-link class="nav-link" to="/">Sair</router-link>
+        <li v-if="usuario" class="nav-item" @click="sair">
+          <a class="nav-link">Sair</a>
         </li>
       </ul>
     </div>
@@ -53,6 +53,11 @@
 <script>
 export default {
   name: "Topbar",
+  computed: {
+    usuario() {
+      return this.$store.state.auth.user;
+    },
+  },
   data() {
     return {
       show: true,
@@ -61,6 +66,10 @@ export default {
   methods: {
     toggleNavbar() {
       this.show = !this.show;
+    },
+    sair() {
+      this.$store.dispatch("auth/logout");
+      this.$router.push("/");
     },
   },
 };
