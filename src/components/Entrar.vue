@@ -27,18 +27,15 @@
       :funcao="entrar"
       :validar="validar"
     />
-    <Alerta :msg="msg" :ok="ok" />
   </Form>
 </template>
 
 <script>
-import Alerta from "./basics/Alerta.vue";
 import Botao from "./basics/Botao.vue";
 import { Field, Form, ErrorMessage } from "vee-validate";
 export default {
   name: "Entrar",
   components: {
-    Alerta,
     Botao,
     Field,
     Form,
@@ -46,8 +43,6 @@ export default {
   },
   data() {
     return {
-      msg: "",
-      ok: false,
       loading: false,
       vEmail: false,
       vSenha: false,
@@ -59,27 +54,31 @@ export default {
   },
   methods: {
     entrar() {
-      this.msg = "";
-      this.ok = false;
       this.loading = true;
       this.$store.dispatch("auth/login", this.x).then(
         (data) => {
-          this.msg = data.message;
-          this.ok = true;
           this.loading = false;
+          this.alerta(data.message, true);
           this.$router.push("/");
         },
         (error) => {
-          this.msg =
+          this.loading = false;
+          this.alerta(
             (error.response &&
               error.response.data &&
               error.response.data.message) ||
-            error.message ||
-            error.toString();
-          this.ok = false;
-          this.loading = false;
+              error.message ||
+              error.toString(),
+            false
+          );
         }
       );
+    },
+    alerta(msg, ok) {
+      this.$store.dispatch("alerta/criar", {
+        msg: msg,
+        ok: ok,
+      });
     },
     validar() {
       return this.vEmail && this.vSenha;

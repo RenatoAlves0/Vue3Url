@@ -1,10 +1,12 @@
 <script setup>
 import Topbar from "./components/Topbar.vue";
+import AlertaGlobal from "./components/basics/AlertaGlobal.vue";
 </script>
 
 <template>
   <div id="app">
     <Topbar />
+    <AlertaGlobal />
     <div class="container">
       <div class="app-center">
         <div class="col-sm-6">
