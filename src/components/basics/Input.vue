@@ -4,8 +4,9 @@
     :name="nome"
     :type="tipo || 'text'"
     :placeholder="placeholder || ''"
-    :rules="() => regras() || {}"
-    v-model="modelo"
+    :rules="regras || {}"
+    v-model="modeloLocal"
+    @input="$emit('changeModelo', modeloLocal)"
   />
   <small v-if="small" class="form-text text-muted"> {{ small }}</small>
   <br v-if="small" />
@@ -16,6 +17,7 @@
 import { Field, ErrorMessage } from "vee-validate";
 export default {
   name: "Input",
+  emits: ["changeModelo"],
   components: {
     Field,
     ErrorMessage,
@@ -25,8 +27,13 @@ export default {
     tipo: String,
     placeholder: String,
     regras: Function,
-    modelo: Object,
+    modelo: String,
     small: String,
+  },
+  data() {
+    return {
+      modeloLocal: this.modelo,
+    };
   },
 };
 </script>

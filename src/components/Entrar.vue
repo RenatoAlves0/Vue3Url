@@ -1,45 +1,39 @@
 <template>
-  <Form class="form-group">
+  <form class="form-group">
     <h5>Entre no App</h5>
-    <Field
-      class="form-control"
-      name="email"
-      type="email"
+    <Input
+      nome="email"
+      tipo="email"
       placeholder="Email"
-      :rules="validarEmail"
-      v-model="x.email"
+      :regras="validarEmail"
+      :modelo="x.email"
+      @changeModelo="x.email = $event"
     />
-    <ErrorMessage class="erro" name="email" />
-
-    <Field
-      class="form-control"
-      name="senha"
-      type="password"
+    <Input
+      nome="senha"
+      tipo="password"
       placeholder="Senha"
-      :rules="validarSenha"
-      v-model="x.senha"
+      :regras="validarSenha"
+      :modelo="x.senha"
+      @changeModelo="x.senha = $event"
     />
-    <ErrorMessage class="erro" name="senha" />
-
     <Botao
       nome="Entrar"
       :loading="loading"
       :funcao="entrar"
       :validar="validar"
     />
-  </Form>
+  </form>
 </template>
 
 <script>
 import Botao from "./basics/Botao.vue";
-import { Field, Form, ErrorMessage } from "vee-validate";
+import Input from "./basics/Input.vue";
 export default {
   name: "Entrar",
   components: {
     Botao,
-    Field,
-    Form,
-    ErrorMessage,
+    Input,
   },
   data() {
     return {

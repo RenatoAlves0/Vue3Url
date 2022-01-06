@@ -1,52 +1,39 @@
 <template>
-  <Form class="form-group">
+  <form class="form-group">
     <h5>Registre-se no App</h5>
-    <Field
-      class="form-control"
-      name="nome"
-      type="text"
+    <Input
+      nome="nome"
       placeholder="Nome"
-      :rules="validarNome"
-      v-model="x.nome"
+      :regras="validarNome"
+      :modelo="x.nome"
+      @changeModelo="x.nome = $event"
     />
-    <ErrorMessage class="erro" name="nome" />
-
-    <Field
-      class="form-control"
-      name="email"
-      type="email"
+    <Input
+      nome="email"
+      tipo="email"
       placeholder="Email"
-      :rules="validarEmail"
-      v-model="x.email"
+      :regras="validarEmail"
+      :modelo="x.email"
+      @changeModelo="x.email = $event"
+      small="Nunca vamos compartilhar seu email, com ninguém."
     />
-    <small class="form-text text-muted">
-      Nunca vamos compartilhar seu email, com ninguém.</small
-    >
-    <br />
-    <ErrorMessage class="erro" name="email" />
-
-    <Field
-      class="form-control"
-      name="senha"
-      type="password"
+    <Input
+      nome="senha"
+      tipo="password"
       placeholder="Senha"
-      :rules="validarSenha"
-      v-model="x.senha"
+      :regras="validarSenha"
+      :modelo="x.senha"
+      @changeModelo="x.senha = $event"
+      small="Criptografamos sua senha, de ponta a ponta."
     />
-    <small class="form-text text-muted">
-      Criptografamos sua senha, de ponta a ponta.</small
-    >
-    <br />
-    <ErrorMessage class="erro" name="senha" />
-
-    <Field
-      class="form-control"
-      name="confirm-senha"
-      type="password"
+    <Input
+      nome="confirm-senha"
+      tipo="password"
       placeholder="Confirmar Senha"
-      :rules="validarConfirmSenha"
+      :regras="validarConfirmSenha"
+      :modelo="x.confirmSenha"
+      @changeModelo="x.confirmSenha = $event"
     />
-    <ErrorMessage class="erro" name="confirm-senha" />
 
     <Botao
       nome="Registrar"
@@ -54,19 +41,17 @@
       :funcao="registrar"
       :validar="validar"
     />
-  </Form>
+  </form>
 </template>
 
 <script>
 import Botao from "./basics/Botao.vue";
-import { Field, Form, ErrorMessage } from "vee-validate";
+import Input from "./basics/Input.vue";
 export default {
   name: "Registrar",
   components: {
     Botao,
-    Field,
-    Form,
-    ErrorMessage,
+    Input,
   },
   data() {
     return {
@@ -79,6 +64,7 @@ export default {
         nome: "",
         email: "",
         senha: "",
+        confirmSenha: "",
       },
     };
   },
@@ -139,7 +125,7 @@ export default {
     validarConfirmSenha(confirmSenha) {
       this.vConfirmSenha = false;
       if (!confirmSenha) return "Obrigatório!";
-      if (confirmSenha != this.x.senha) return "Senha diferente!";
+      if (confirmSenha != this.x.senha) return "Senhas diferentes!";
       this.vConfirmSenha = true;
       return true;
     },
