@@ -7,10 +7,6 @@ class UserService {
         let user = JSON.parse(localStorage.getItem('user'))
         let token = {}
         if (user && user.accessToken) token = { 'x-access-token': user.accessToken }
-        console.log('usuário')
-        console.log(user)
-        console.log('token')
-        console.log(token)
         return axios.get(API_URL + 'user/verificar_token', { headers: token })
     }
 }

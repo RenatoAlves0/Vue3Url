@@ -1,65 +1,76 @@
 <template>
-  <Form @submit="entrar" class="form-group">
+  <form class="form-group">
     <h5>Adicionar URL</h5>
-    <Field
-      class="form-control"
-      name="url"
-      type="url"
+    <Input
+      nome="url"
       placeholder="Url"
-      :rules="validarUrl"
-      v-model="x.url"
+      :regras="validarUrl"
+      :modelo="x.url"
+      @changeModelo="x.url = $event"
     />
-    <ErrorMessage class="erro" name="url" />
-
-    <button
-      type="submit"
-      :class="validar() ? '' : 'disabled'"
-      class="btn btn-primary form-control"
+    <Botao
+      nome="Adicionar"
+      :loading="loading"
+      :funcao="adicionar"
+      :validar="validar"
+    />
+    <small v-if="!usuario" class="form-text text-muted"
+      >Você está no modo Anônimo! Caso adicione uma nova URL você não poderá
+      excluí-la posteriormente.</small
     >
-      Salvar
-    </button>
-
-    <h5>{{ usuario }}</h5>
-  </Form>
+    <div v-if="!usuario" class="row mt20">
+      <router-link class="col nav-link" to="/registrar"
+        >Registrar-se</router-link
+      >
+      <router-link class="col nav-link" to="/entrar">Entrar</router-link>
+    </div>
+  </form>
 </template>
 
 <script>
-import { Field, Form, ErrorMessage } from "vee-validate";
-import UserService from "../../services/user";
+import Input from "../basics/Input.vue";
+import Botao from "../basics/Botao.vue";
 export default {
-  name: "Entrar",
+  name: "CadastroUrl",
   components: {
-    Field,
-    Form,
-    ErrorMessage,
+    Input,
+    Botao,
+  },
+  computed: {
+    usuario() {
+      return this.$store.state.auth.user;
+    },
   },
   data() {
     return {
-      usuario: "",
+      loading: false,
       vUrl: false,
       x: {
         url: "",
       },
     };
   },
-  mounted() {
-    UserService.getUser().then(
-      (response) => {
-        this.usuario = response.data;
-      },
-      (error) => {
-        this.usuario =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-      }
-    );
-  },
   methods: {
-    entrar() {
-      console.log({ ...this.x });
+    adicionar() {
+      // this.loading = true;
+      // this.$store.dispatch("auth/login", this.x).then(
+      //   (data) => {
+      //     this.loading = false;
+      //     this.alerta(data.message, true);
+      //     this.$router.push("/");
+      //   },
+      //   (error) => {
+      //     this.loading = false;
+      //     this.alerta(
+      //       (error.response &&
+      //         error.response.data &&
+      //         error.response.data.message) ||
+      //         error.message ||
+      //         error.toString(),
+      //       false
+      //     );
+      //   }
+      // );
     },
     validar() {
       return this.vUrl;

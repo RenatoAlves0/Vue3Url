@@ -36,8 +36,11 @@
         <li v-if="usuario" class="nav-item">
           <a class="nav-link disabled">Olá {{ usuario.nome }} :-)</a>
         </li>
+        <li v-else class="nav-item">
+          <a class="nav-link disabled">Olá Anônimo :-)</a>
+        </li>
         <li v-if="!usuario" class="nav-item">
-          <router-link class="nav-link" to="/registrar">Registrar</router-link>
+          <router-link class="nav-link" to="/registrar">Registrar-se</router-link>
         </li>
         <li v-if="!usuario" class="nav-item">
           <router-link class="nav-link" to="/entrar">Entrar</router-link>
