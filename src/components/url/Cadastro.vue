@@ -1,5 +1,5 @@
 <template>
-  <form class="form-group">
+  <Form class="form-group">
     <h5>Adicionar URL</h5>
     <Input
       nome="url"
@@ -24,15 +24,17 @@
       >
       <router-link class="col nav-link" to="/entrar">Entrar</router-link>
     </div>
-  </form>
+  </Form>
 </template>
 
 <script>
+import { Form } from "vee-validate";
 import Input from "../basics/Input.vue";
 import Botao from "../basics/Botao.vue";
 export default {
   name: "CadastroUrl",
   components: {
+    Form,
     Input,
     Botao,
   },
@@ -42,7 +44,7 @@ export default {
       vUrl: false,
       x: {
         big: "",
-        user: this.$store.state.auth.user,
+        user: this.$store.state.usuario.user,
       },
     };
   },

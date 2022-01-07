@@ -1,16 +1,14 @@
-import AuthService from '../services/auth'
+import UsuarioService from '../services/usuario'
 
 const user = JSON.parse(localStorage.getItem('user'))
-const initialState = user
-  ? { status: { loggedIn: true }, user }
-  : { status: { loggedIn: false }, user: null }
+const initialState = user ? { user: user } : { user: null }
 
-export const auth = {
+export const usuario = {
   namespaced: true,
   state: initialState,
   actions: {
     login({ commit }, user) {
-      return AuthService.login(user).then(
+      return UsuarioService.login(user).then(
         user => {
           commit('loginSuccess', user)
           return Promise.resolve(user)
@@ -23,18 +21,16 @@ export const auth = {
     },
 
     logout({ commit }) {
-      AuthService.logout()
+      UsuarioService.logout()
       commit('logout')
     },
 
-    register({ commit }, user) {
-      return AuthService.register(user).then(
+    registrar({ commit }, user) {
+      return UsuarioService.registrar(user).then(
         response => {
-          commit('registerSuccess')
           return Promise.resolve(response.data)
         },
         error => {
-          commit('registerFailure')
           return Promise.reject(error)
         }
       )
@@ -43,22 +39,13 @@ export const auth = {
 
   mutations: {
     loginSuccess(state, user) {
-      state.status.loggedIn = true
       state.user = user
     },
     loginFailure(state) {
-      state.status.loggedIn = false
       state.user = null
     },
     logout(state) {
-      state.status.loggedIn = false
       state.user = null
-    },
-    registerSuccess(state) {
-      state.status.loggedIn = false
-    },
-    registerFailure(state) {
-      state.status.loggedIn = false
     }
   }
 }

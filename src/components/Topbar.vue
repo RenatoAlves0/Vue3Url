@@ -59,7 +59,7 @@ export default {
   name: "Topbar",
   computed: {
     usuario() {
-      return this.$store.state.auth.user;
+      return this.$store.state.usuario.user;
     },
   },
   data() {
@@ -72,7 +72,7 @@ export default {
       this.show = !this.show;
     },
     sair() {
-      this.$store.dispatch("auth/logout");
+      this.$store.dispatch("usuario/logout");
       this.$router.push("/");
     },
   },

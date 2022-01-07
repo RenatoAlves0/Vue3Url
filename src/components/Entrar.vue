@@ -1,5 +1,5 @@
 <template>
-  <form class="form-group">
+  <Form class="form-group">
     <h5>Entre no App</h5>
     <Input
       nome="email"
@@ -23,15 +23,17 @@
       :funcao="entrar"
       :validar="validar"
     />
-  </form>
+  </Form>
 </template>
 
 <script>
+import { Form } from "vee-validate";
 import Botao from "./basics/Botao.vue";
 import Input from "./basics/Input.vue";
 export default {
   name: "Entrar",
   components: {
+    Form,
     Botao,
     Input,
   },
@@ -49,7 +51,7 @@ export default {
   methods: {
     entrar() {
       this.loading = true;
-      this.$store.dispatch("auth/login", this.x).then(
+      this.$store.dispatch("usuario/login", this.x).then(
         (data) => {
           this.loading = false;
           this.alerta(data.message, true);

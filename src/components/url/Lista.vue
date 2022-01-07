@@ -131,7 +131,7 @@ export default {
       });
     },
     permissaoDeletar(url) {
-      let u = this.$store.state.auth.user;
+      let u = this.$store.state.usuario.user;
       if (
         u &&
         u._id &&
