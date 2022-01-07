@@ -2,9 +2,7 @@
   "name": "vue3url",
   "version": "1.0.0",
   "scripts": {
-    "start": "clear && vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "start": "clear && vite"
   },
   "dependencies": {
     "axios": "^0.24.0",
