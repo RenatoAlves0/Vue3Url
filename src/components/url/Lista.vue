@@ -1,22 +1,45 @@
 <template>
-  <div class="list-group">
+  <ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        :class="opUrl ? 'active' : ''"
+        @click="tipoLista('url')"
+        >URLs</a
+      >
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        :class="opTop ? 'active' : ''"
+        @click="tipoLista('top')"
+        >Top 100</a
+      >
+    </li>
+  </ul>
+
+  <div
+    class="mt20 list-group"
+    v-for="el in opTop ? lista.top100 : lista.urls"
+    :key="el._id"
+  >
     <a
-      href="#"
       class="
-        list-group-item list-group-item-action
-        flex-column
+        list-group-item-action
         align-items-start
+        list-group-item
+        flex-column
       "
+      :href="el.big"
+      target="_blank"
     >
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">{{ small }}</h5>
-        <small>Visitas: 100</small>
-      </div>
-      <small>{{ big }}<br /></small>
+      <h5 class="mb-1">{{ el.small }}</h5>
+      <small v-if="opTop">Cliques: {{ el.views }}<br /></small>
+      <small v-if="opTop">{{ el.big }}</small>
       <button
+        v-if="permissaoDeletar(el)"
         class="btn btn-danger form-control"
         type="submit"
-        :class="true ? '' : 'disabled'"
       >
         Excluir
       </button>
@@ -27,13 +50,47 @@
 <script>
 export default {
   name: "Lista",
-  computed: {},
+  mounted() {
+    this.load();
+  },
   data() {
     return {
-      small: "Encurtado",
-      big: "https://getbootstrap.com.br/docs/4.1/components/list-group/",
+      opUrl: true,
+      opTop: false,
+      user: {},
+      lista: {
+        urls: [],
+        top100: [],
+      },
     };
   },
-  methods: {},
+  methods: {
+    async load() {
+      await this.$store.dispatch("url/listar");
+      this.lista = this.$store.state.url;
+    },
+    permissaoDeletar(url) {
+      let u = this.$store.state.auth.user;
+      if (
+        u &&
+        u._id &&
+        url &&
+        url.user &&
+        url.user._id &&
+        url.user._id == u._id
+      )
+        return true;
+      return false;
+    },
+    async tipoLista(x) {
+      if (x == "top") {
+        this.opUrl = false;
+        this.opTop = true;
+      } else {
+        this.opUrl = true;
+        this.opTop = false;
+      }
+    },
+  },
 };
 </script>

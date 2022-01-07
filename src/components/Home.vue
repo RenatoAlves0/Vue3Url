@@ -1,13 +1,11 @@
 <template>
-  <Nav />
-  <UrlLista class="mt20" />
+  <UrlLista />
 </template>
 
 <script>
-import Nav from "./Nav.vue";
 import UrlLista from "./url/Lista.vue";
 export default {
-  components: { Nav, UrlLista },
+  components: { UrlLista },
   name: "Home",
 };
 </script>

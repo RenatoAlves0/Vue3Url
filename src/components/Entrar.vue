@@ -53,7 +53,9 @@ export default {
         (data) => {
           this.loading = false;
           this.alerta(data.message, true);
-          this.$router.push("/");
+          this.$router.push({
+            name: "home",
+          });
         },
         (error) => {
           this.loading = false;
