@@ -3,7 +3,7 @@ import axios from 'axios'
 const API_URL = 'https://node-url-speedio.herokuapp.com/user'
 
 class UsuarioService {
-    // get() {
+    // validarToken() {
     //     let user = JSON.parse(localStorage.getItem('/'))
     //     let token = {}
     //     if (user && user.accessToken) token = { 'x-access-token': user.accessToken }
@@ -18,7 +18,7 @@ class UsuarioService {
         })
     }
 
-    async login(user) {
+    async entrar(user) {
         const resp = await axios
             .get(API_URL + '/logar', {
                 params: {
@@ -31,7 +31,7 @@ class UsuarioService {
         return resp.data
     }
 
-    logout() {
+    sair() {
         localStorage.removeItem('user')
     }
 }

@@ -7,22 +7,22 @@ export const usuario = {
   namespaced: true,
   state: initialState,
   actions: {
-    login({ commit }, user) {
-      return UsuarioService.login(user).then(
+    entrar({ commit }, user) {
+      return UsuarioService.entrar(user).then(
         user => {
-          commit('loginSuccess', user)
+          commit('entrarOk', user)
           return Promise.resolve(user)
         },
         error => {
-          commit('loginFailure')
+          commit('entrarFalha')
           return Promise.reject(error)
         }
       )
     },
 
-    logout({ commit }) {
-      UsuarioService.logout()
-      commit('logout')
+    sair({ commit }) {
+      UsuarioService.sair()
+      commit('sair')
     },
 
     registrar({ commit }, user) {
@@ -38,13 +38,13 @@ export const usuario = {
   },
 
   mutations: {
-    loginSuccess(state, user) {
+    entrarOk(state, user) {
       state.user = user
     },
-    loginFailure(state) {
+    entrarFalha(state) {
       state.user = null
     },
-    logout(state) {
+    sair(state) {
       state.user = null
     }
   }

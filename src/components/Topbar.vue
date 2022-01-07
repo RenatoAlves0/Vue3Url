@@ -72,7 +72,7 @@ export default {
       this.show = !this.show;
     },
     sair() {
-      this.$store.dispatch("usuario/logout");
+      this.$store.dispatch("usuario/sair");
       this.$router.push("/");
     },
   },

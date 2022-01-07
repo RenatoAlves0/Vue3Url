@@ -51,7 +51,7 @@ export default {
   methods: {
     entrar() {
       this.loading = true;
-      this.$store.dispatch("usuario/login", this.x).then(
+      this.$store.dispatch("usuario/entrar", this.x).then(
         (data) => {
           this.loading = false;
           this.alerta(data.message, true);
