@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:3001/url'
+const API_URL = 'https://node-url-speedio.herokuapp.com/url'
 
 class UrlService {
     async salvar(url) {
