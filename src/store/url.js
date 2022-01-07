@@ -6,8 +6,8 @@ export const url = {
     actions: {
         salvar({ commit }, url) {
             return UrlService.salvar(url).then(
-                url => {
-                    return Promise.resolve(url)
+                x => {
+                    return Promise.resolve(x)
                 },
                 error => {
                     return Promise.reject(error)
@@ -18,9 +18,9 @@ export const url = {
         async listar({ commit }) {
             await UrlService.listar()
                 .then(
-                    urls => {
-                        commit('atualizarUrls', urls)
-                        return Promise.resolve(urls)
+                    x => {
+                        commit('atualizarUrls', x)
+                        return Promise.resolve(x)
                     },
                     error => {
                         return Promise.reject(error)
@@ -28,15 +28,37 @@ export const url = {
                 )
             await UrlService.top100()
                 .then(
-                    top100 => {
-                        commit('atualizarTop100', top100)
-                        return Promise.resolve(top100)
+                    x => {
+                        commit('atualizarTop100', x)
+                        return Promise.resolve(x)
                     },
                     error => {
                         return Promise.reject(error)
                     }
                 )
         },
+
+        async incrementarClick({ commit }, id) {
+            return UrlService.incrementarClick(id).then(
+                x => {
+                    return Promise.resolve(x)
+                },
+                error => {
+                    return Promise.reject(error)
+                }
+            )
+        },
+
+        async deletar({ commit }, id) {
+            return UrlService.deletar(id).then(
+                x => {
+                    return Promise.resolve(x)
+                },
+                error => {
+                    return Promise.reject(error)
+                }
+            )
+        }
     },
 
     mutations: {

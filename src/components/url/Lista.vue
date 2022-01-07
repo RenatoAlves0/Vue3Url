@@ -30,20 +30,22 @@
         list-group-item
         flex-column
       "
+      @click="incrementarClick(el._id)"
       :href="el.big"
       target="_blank"
     >
       <h5 class="mb-1">{{ el.small }}</h5>
       <small v-if="opTop">Cliques: {{ el.views }}<br /></small>
       <small v-if="opTop">{{ el.big }}</small>
-      <button
-        v-if="permissaoDeletar(el)"
-        class="btn btn-danger form-control"
-        type="submit"
-      >
-        Excluir
-      </button>
     </a>
+    <button
+      v-if="permissaoDeletar(el)"
+      class="btn btn-danger form-control"
+      type="button"
+      @click="deletar(el._id)"
+    >
+      Excluir
+    </button>
   </div>
 </template>
 
@@ -68,6 +70,46 @@ export default {
     async load() {
       await this.$store.dispatch("url/listar");
       this.lista = this.$store.state.url;
+    },
+    incrementarClick(id) {
+      this.$store.dispatch("url/incrementarClick", id).then(
+        (data) => {
+          this.alerta(data.message, true), this.load();
+        },
+        (error) => {
+          this.alerta(
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+              error.message ||
+              error.toString(),
+            false
+          );
+        }
+      );
+    },
+    deletar(id) {
+      this.$store.dispatch("url/deletar", id).then(
+        (data) => {
+          this.alerta(data.message, true), this.load();
+        },
+        (error) => {
+          this.alerta(
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+              error.message ||
+              error.toString(),
+            false
+          );
+        }
+      );
+    },
+    alerta(msg, ok) {
+      this.$store.dispatch("alerta/criar", {
+        msg: msg,
+        ok: ok,
+      });
     },
     permissaoDeletar(url) {
       let u = this.$store.state.auth.user;

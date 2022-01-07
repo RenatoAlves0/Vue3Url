@@ -19,7 +19,7 @@ class UrlService {
             const resp = await axios.get(API_URL + '/')
             return resp.data
         } catch (err) {
-            console.log(err)
+            console.error(err)
             return []
         }
     }
@@ -29,17 +29,27 @@ class UrlService {
             const resp = await axios.get(API_URL + '/top100')
             return resp.data
         } catch (err) {
-            console.log(err)
+            console.error(err)
             return []
         }
     }
 
-    incrementarClick() {
-
+    async incrementarClick(id) {
+        try {
+            const resp = await axios.get(API_URL + '/view/' + id)
+            return resp.data
+        } catch (err) {
+            return err
+        }
     }
 
-    deletar() {
-
+    async deletar(id) {
+        try {
+            const resp = await axios.delete(API_URL + '/' + id)
+            return resp.data
+        } catch (err) {
+            return err
+        }
     }
 }
 
