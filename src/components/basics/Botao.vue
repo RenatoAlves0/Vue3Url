@@ -6,12 +6,12 @@
     v-on:click.prevent="funcao()"
   >
     <span
-      v-show="loading"
+      v-if="loading"
       class="spinner-grow spinner-grow-sm"
       role="status"
       aria-hidden="true"
     ></span>
-    <span v-show="!loading">{{ nome }}</span>
+    <span v-if="!loading">{{ nome }}</span>
   </button>
 </template>
 

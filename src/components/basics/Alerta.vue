@@ -1,6 +1,6 @@
 <template>
   <div
-    v-show="msg"
+    v-if="msg"
     class="alert"
     :class="ok ? 'alert-success' : 'alert-danger'"
   >

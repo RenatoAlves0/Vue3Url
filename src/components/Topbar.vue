@@ -22,7 +22,7 @@
       id="navbarSupportedContent"
       v-bind:class="{ in: show }"
     >
-      <ul class="navbar-nav mr-auto col-sm-6">
+      <ul class="navbar-nav mr-auto col-6">
         <li class="nav-item">
           <router-link class="nav-link" to="/">Home</router-link>
         </li>
@@ -32,7 +32,7 @@
           >
         </li>
       </ul>
-      <ul class="navbar-nav mr-auto col-sm-6 topbar-right">
+      <ul class="navbar-nav mr-auto col-6 topbar-right">
         <li v-if="usuario" class="nav-item">
           <a class="nav-link disabled">Olá {{ usuario.nome }} :-)</a>
         </li>
@@ -40,7 +40,9 @@
           <a class="nav-link disabled">Olá Anônimo :-)</a>
         </li>
         <li v-if="!usuario" class="nav-item">
-          <router-link class="nav-link" to="/registrar">Registrar-se</router-link>
+          <router-link class="nav-link" to="/registrar"
+            >Registrar-se</router-link
+          >
         </li>
         <li v-if="!usuario" class="nav-item">
           <router-link class="nav-link" to="/entrar">Entrar</router-link>

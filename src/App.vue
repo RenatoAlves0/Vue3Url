@@ -9,7 +9,7 @@ import AlertaGlobal from "./components/basics/AlertaGlobal.vue";
     <AlertaGlobal />
     <div class="container">
       <div class="app-center">
-        <div class="col-sm-6">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <form class="form-body">
             <router-view></router-view>
           </form>
