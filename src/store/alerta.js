@@ -1,9 +1,6 @@
-
 export const alerta = {
     namespaced: true,
-    state: {
-        itens: []
-    },
+    state: { itens: [] },
     actions: {
         criar({ commit }, item) {
             commit('criarAlerta', item)

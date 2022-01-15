@@ -1,17 +1,26 @@
 import UsuarioService from '../services/usuario'
 
 const user = JSON.parse(localStorage.getItem('user'))
-const initialState = user ? { user: user } : { user: null }
 
 export const usuario = {
   namespaced: true,
-  state: initialState,
+  state: user ? { user: user } : { user: null },
   actions: {
-    entrar({ commit }, user) {
-      return UsuarioService.entrar(user).then(
-        user => {
-          commit('entrarOk', user)
-          return Promise.resolve(user)
+    async registrar({ commit }, user) {
+      return await UsuarioService.registrar(user).then(
+        x => {
+          return Promise.resolve(x.data)
+        },
+        error => {
+          return Promise.reject(error)
+        }
+      )
+    },
+    async entrar({ commit }, user) {
+      return await UsuarioService.entrar(user).then(
+        x => {
+          commit('entrarSucesso', x)
+          return Promise.resolve(x)
         },
         error => {
           commit('entrarFalha')
@@ -19,26 +28,14 @@ export const usuario = {
         }
       )
     },
-
     sair({ commit }) {
       UsuarioService.sair()
       commit('sair')
-    },
-
-    registrar({ commit }, user) {
-      return UsuarioService.registrar(user).then(
-        response => {
-          return Promise.resolve(response.data)
-        },
-        error => {
-          return Promise.reject(error)
-        }
-      )
     }
   },
 
   mutations: {
-    entrarOk(state, user) {
+    entrarSucesso(state, user) {
       state.user = user
     },
     entrarFalha(state) {
