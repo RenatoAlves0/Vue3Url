@@ -45,8 +45,8 @@
 
 <script>
 import { Form } from "vee-validate";
-import Botao from "./basics/Botao.vue";
-import Input from "./basics/Input.vue";
+import Botao from "../../components/Botao.vue";
+import Input from "../../components/Input.vue";
 export default {
   name: "Registrar",
   components: {

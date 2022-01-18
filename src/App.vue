@@ -1,6 +1,6 @@
 <script setup>
 import Topbar from "./components/Topbar.vue";
-import AlertaGlobal from "./components/basics/AlertaGlobal.vue";
+import AlertaGlobal from "./components/AlertaGlobal.vue";
 </script>
 
 <template>

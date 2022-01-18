@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev": "vite"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.2",

@@ -29,8 +29,8 @@
 
 <script>
 import { Form } from "vee-validate";
-import Input from "../basics/Input.vue";
-import Botao from "../basics/Botao.vue";
+import Input from "../../components/Input.vue";
+import Botao from "../../components/Botao.vue";
 export default {
   name: "CadastroUrl",
   components: {
